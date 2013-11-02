@@ -1,7 +1,8 @@
 redmjne
 =======
 
-A fully self-contained deployment of JRuby Redmine with minimal custimazation via plugins and themes in a JEE WAR.
+JRuby Redmine deployment that is fully self-contained, with minimal custimazation via plugins
+and themes in a JEE WAR.
 
 Apache Tomcat example configs. with and without SSL are included.
 
