@@ -1,0 +1,20 @@
+#rails specific
+*.sqlite3
+config/database.yml
+log/*
+tmp/*
+
+#java specific
+*.class
+
+#netbeans ignore personal stuff 
+nbproject/private/
+
+## generic files to ignore
+*~
+.svn*
+*.lock
+*.DS_Store
+*.swp
+*.out
+
