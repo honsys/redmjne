@@ -5,11 +5,14 @@
 # accepting their licensing agreement (via a button click on 
 # the download page).
 #
-setenv JRUBYREL 1.7.9
-setenv JRUBY jruby-bin-${JRUBYREL}
-setenv REDMINEREL 2.4.1
-setenv REDMINE redmine-${REDMINEREL}
+# feb 2014 releases:
 set cwd = `pwd`
+set envset = './env.csh' 
+if ( ! -e ${envset} ) then
+  echo "please make sure the current working directory includes ${envset} ..."
+  exit
+endif
+#
 if ( $cwd:t != 'build' ) then
   mkdir ./build >& /dev/null
   pushd ./build
@@ -24,8 +27,10 @@ echo source \'https://rubygems.org\' > $gemfile
 grep 'gem ' ./warbler/Gemfile > ./.Gemfile
 grep 'gem ' $REDMINE/Gemfile >> ./.Gemfile
 #echo 'gem "activesupport", "3.2.16"' >> ./.Gemfile
+# some potentially useful gems:
 echo 'gem "css2less"' >> ./.Gemfile
 echo 'gem "execjs"' >> ./.Gemfile
+echo 'gem "pandoc-ruby"' >> ./.Gemfile
 #echo 'gem "rubyzip", "0.9.9"' >> ./.Gemfile
 # 
 # the following are backlog gem deps: 
@@ -38,6 +43,7 @@ echo 'gem "open-uri-cached"' >> ./.Gemfile
 echo 'gem "prawn"' >> ./.Gemfile
 #
 # plugins need this:
+echo 'gem "multi_json", "=1.8.4"' >> ./.Gemfile
 echo 'gem "redmine_acts_as_taggable_on"' >> ./.Gemfile
 echo 'gem "ya2yaml"' >> ./.Gemfile
 #

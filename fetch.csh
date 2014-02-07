@@ -8,21 +8,18 @@
 # or alex kasko's unofficial builds:
 # https://bitbucket.org/alexkasko/openjdk-unofficial-builds/downloads
 #
-# dec 2013 releases:
-setenv JAVAREL 1.7
-setenv JRUBYREL 1.7.9
-setenv JRUBY jruby-bin-${JRUBYREL}
-setenv TOMCATREL 7.0.47
-setenv TOMCAT apache-tomcat-${TOMCATREL}
-setenv REDMINEREL 2.4.1
-setenv REDMINE redmine-${REDMINEREL}
+# feb 2014 releases:
 set cwd = `pwd`
+set envset = './env.csh' 
+if ( ! -e ${envset} ) then
+  echo "please make sure the current working directory includes ${envset} ..."
+  exit
+endif
 if ( $cwd:t != 'build' ) then
   mkdir ./build >& /dev/null
   pushd ./build
   set cwd = `pwd`
 endif
-setenv JRUBY_HOME $cwd/jruby
 #
 # optionally fetch latest java:
 if ( ! -e $JAVA_HOME ) then
@@ -41,19 +38,20 @@ if ( ! -e $JAVA_HOME ) then
   ln -s $openjdk java
 endif
 #
-ln -s /usr/local/apache-tomcat-7.0.47 >& /dev/null
+set tomcat = apache-tomcat-${TOMCATREL}
 #
 #optionally fecth latest apache tomcat:
-if ( ! -e $TOMCAT ) then
-  tar xzvf /downld/{$TOMCAT}.tar.gz
+if ( ! -e ${tomcat} ) then
+  tar xzvf /downld/apache/${tomcat}.tar.gz
   if ( $? != 0 ) then
-    echo need $TOMCAT or newer installed here -- $cwd 
+    echo need ${tomcat} or newer installed here -- $cwd 
     exit
   endif
   ln -s $TOMCAT catalina
 endif
 #
-if ( ! -e ${JRUBY} ) then
+set jrubyrel = jruby-${JRUBYREL}
+if ( ! -e ${jrubyrel} ) then
   rm -rf jruby* # if older release and/or build artifacts are present
   wget -O ${JRUBY}.tar.gz http://jruby.org.s3.amazonaws.com/downloads/${JRUBYREL}/${JRUBY}.tar.gz
   tar xzvf ${JRUBY}.tar.gz
@@ -62,7 +60,7 @@ if ( ! -e ${JRUBY} ) then
     exit
   endif
 endif
-ln -s jruby-${JRUBYREL} jruby >& /dev/null
+ln -s ${jrubyrel} jruby >& /dev/null
 #
 # get latest redmine and may need to edit its Gemfile:
 if ( ! -e $REDMINE ) then

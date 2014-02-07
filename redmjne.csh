@@ -6,33 +6,28 @@
 # http://jabox.tumblr.com/post/18973862661/how-to-get-redmine-1-3-1-running-in-2-minutes
 #
 # work with the latest releases (redmine, jruby, tomcat):
+# feb 2014 releases:
+set cwd = `pwd`
+set envset = './env.csh' 
+if ( ! -e ${envset} ) then
+  echo "please make sure the current working directory includes ${envset} ..."
+  exit
+endif
+#
 set opt = env
 set cwd = `pwd`
-setenv JRUBYREL 1.7.9
-setenv JRUBY jruby-bin-${JRUBYREL}
-setenv REDMINEREL 2.4.1
-setenv REDMINE redmine-${REDMINEREL}
-setenv REDMINE_LANG 'en'
-setenv REDMJNE redmjne${REDMINEREL}
-setenv RAILS_ENV production
 # presumably a sym-link to the latest (>= 1.7.9)
 #setenv JRUBY_HOME /usr/local/jruby
-setenv JRUBY_HOME $cwd/build/jruby
-setenv JRUBY_OPTS '-Xcext.enabled=true'
-setenv ASSETS $cwd/assets
-if ( $1 != "" ) set opt = "$1"
-echo "REDMINE == $REDMINE"
-echo "REDMJNE == $REDMJNE"
-echo "JRUBY_HOME == $JRUBY_HOME"
 ls -al $JRUBY_HOME
 find $ASSETS -type d | egrep -v '\.svn|\.git|\.\.'
+if ( $1 != "" ) set opt = "$1"
 if ( "$opt" == "env" ) exit
 #
 # do all work in ,./build sub-dir:
 # fetch apache-tomcat, jruby, and redmine dependencies
 if ( "$opt" == "all" ) source ./fetch.csh # can be runstand-alone, so it also pushd and popd to/from ./build
 #
-# note minor hand edits of Gemfiles for version deps. may be needed too:
+# note minor hand-edits of Gemfiles for version deps. may be needed too:
 if ( "$opt" == "all" ) source ./gems.csh # can be run stand-alone, so it also pushd and popd to/from ./build
 #
 # dependency gems from merged redmine and warberl Gemfiles ...
@@ -122,15 +117,19 @@ sed 's/#secret_token/secret_token/g' < ./config/configuration.yml.example | sed 
 # plugins
 rsync -lav --exclude='.svn' --exclude='.git' ../../../github/redmine/redmine_banner plugins 
 #$JRUBY_HOME/bin/jruby -S bundle exec redmine:plugins NAME=redmine_banner RAILS_ENV=production
-$JRUBY_HOME/bin/rake redmine:plugins NAME=redmine_banner RAILS_ENV=production
+# this seems to be better:
+#$JRUBY_HOME/bin/rake redmine:plugins NAME=redmine_banner RAILS_ENV=production
 rsync -lav --exclude='.svn' --exclude='.git' ../../../github/redmine/redmine_knowledgebase plugins
-$JRUBY_HOME/bin/rake redmine:plugins NAME=redmine_knowledgebase RAILS_ENV=production
+#$JRUBY_HOME/bin/rake redmine:plugins NAME=redmine_knowledgebase RAILS_ENV=production
 rsync -lav --exclude='.svn' --exclude='.git' ../../../github/redmine/redmine_wiki_books plugins
-$JRUBY_HOME/bin/rake redmine:plugins NAME=redmine_wiki_books RAILS_ENV=production
+#$JRUBY_HOME/bin/rake redmine:plugins NAME=redmine_wiki_books RAILS_ENV=production
 rsync -lav --exclude='.svn' --exclude='.git' ../../../github/redmine/redmine_startpage plugins
-$JRUBY_HOME/bin/rake redmine:plugins NAME=redmine_startpage RAILS_ENV=production
+#$JRUBY_HOME/bin/rake redmine:plugins NAME=redmine_startpage RAILS_ENV=production
 rsync -lav --exclude='.svn' --exclude='.git' ../../../github/redmine/redmine_latex_mathjax plugins
-$JRUBY_HOME/bin/rake redmine:plugins NAME=redmine_latex_mathjax RAILS_ENV=production
+#$JRUBY_HOME/bin/rake redmine:plugins NAME=redmine_latex_mathjax RAILS_ENV=production
+rsync -lav --exclude='.svn' --exclude='.git' ../../../github/redmine/redmine-wiki_graphviz_plugin plugins
+#$JRUBY_HOME/bin/rake redmine:plugins NAME=redmine-wiki_graphviz RAILS_ENV=production
+#
 #$JRUBY_HOME/bin/rake redmine:plugins NAME=redmine_crm RAILS_ENV=production
 #$JRUBY_HOME/bin/rake redmine:plugins NAME=redmine_cms RAILS_ENV=production
 #
