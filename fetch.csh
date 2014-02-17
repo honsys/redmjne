@@ -15,6 +15,7 @@ if ( ! -e ${envset} ) then
   echo "please make sure the current working directory includes ${envset} ..."
   exit
 endif
+source ${envset} 
 if ( $cwd:t != 'build' ) then
   mkdir ./build >& /dev/null
   pushd ./build
@@ -31,6 +32,7 @@ if ( ! -e $JAVA_HOME ) then
   unzip {$openjdk}.zip
   if ( $? != 0 ) then
     echo aborting due to lack of $JAVA_HOME
+    popd
     exit
   endif
   ln -s $openjdk unofficial_jdk
@@ -45,6 +47,7 @@ if ( ! -e ${tomcat} ) then
   tar xzvf /downld/apache/${tomcat}.tar.gz
   if ( $? != 0 ) then
     echo need ${tomcat} or newer installed here -- $cwd 
+    popd
     exit
   endif
   ln -s $TOMCAT catalina
@@ -57,6 +60,7 @@ if ( ! -e ${jrubyrel} ) then
   tar xzvf ${JRUBY}.tar.gz
   if ( $? != 0 ) then
     echo aborting due to lack of $JRUBY
+    popd
     exit
   endif
 endif
@@ -69,6 +73,7 @@ if ( ! -e $REDMINE ) then
   tar zxvf ${REDMINE}.tar.gz
   if ( $? != 0 ) then
     echo aborting due to lack of $REDMINE
+    popd
     exit
   endif
 endif

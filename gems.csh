@@ -12,6 +12,7 @@ if ( ! -e ${envset} ) then
   echo "please make sure the current working directory includes ${envset} ..."
   exit
 endif
+source ${envset}
 #
 if ( $cwd:t != 'build' ) then
   mkdir ./build >& /dev/null
@@ -19,7 +20,6 @@ if ( $cwd:t != 'build' ) then
   set cwd = `pwd`
 endif
 setenv JRUBY_HOME $cwd/jruby
-#source ../fetch.csh
 # rm Gemfile and Gemfile.lock
 rm Gemfile Gemfile.lock >& /dev/null
 set gemfile = Gemfile${JRUBYREL}_${REDMINEREL}
