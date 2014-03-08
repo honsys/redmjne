@@ -12,7 +12,7 @@ if ( ! -e ${envset} ) then
   echo "please make sure the current working directory includes ${envset} ..."
   exit
 endif
-source ${envset}
+source ${envset} $argv
 #
 if ( $cwd:t != 'build' ) then
   mkdir ./build >& /dev/null
@@ -27,10 +27,11 @@ echo source \'https://rubygems.org\' > $gemfile
 grep 'gem ' ./warbler/Gemfile > ./.Gemfile
 grep 'gem ' $REDMINE/Gemfile >> ./.Gemfile
 #echo 'gem "activesupport", "3.2.16"' >> ./.Gemfile
-# some potentially useful gems:
+# some potentially useful gems (markdown supported by redcarpet):
 echo 'gem "css2less"' >> ./.Gemfile
 echo 'gem "execjs"' >> ./.Gemfile
 echo 'gem "pandoc-ruby"' >> ./.Gemfile
+#echo 'gem "redcarpet"' >> ./.Gemfile
 #echo 'gem "rubyzip", "0.9.9"' >> ./.Gemfile
 # 
 # the following are backlog gem deps: 
