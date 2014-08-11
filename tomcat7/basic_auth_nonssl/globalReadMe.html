@@ -1,0 +1,199 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+
+    <meta http-equiv="content-type" content="text/html; charset=windows-1252">
+  </head>
+  <body>
+    <p>
+      (hon: From <a
+        href="http://tomcat.apache.org//tomcat-7.0-doc/default-servlet.html">
+        DefaultServlet directory listing options)</a> <hl>
+      </hl></p>
+    <p>
+      You can use either <code>localXsltFile</code> or
+      <code>globalXsltFile</code> and DefaultServlet will create
+      an xml document and run it through an xsl transformation based
+      on the values provided in <code>localXsltFile</code> and
+      <code>globalXsltFile</code>. <code>localXsltFile</code> is first
+      checked, followed by <code>globalXsltFile</code>, then default
+      behaviors takes place.
+    </p>
+    <p>
+      Format:
+    </p>
+    <div align="left">
+      <table cellspacing="4" border="0" cellpadding="0">
+        <tbody>
+          <tr>
+            <td height="1" bgcolor="#023264" width="1"><img alt=""
+                src="./images/void.gif" height="1" border="0" hspace="0"
+                vspace="0" width="1"></td>
+            <td height="1" bgcolor="#023264"><img alt=""
+                src="./images/void.gif" height="1" border="0" hspace="0"
+                vspace="0" width="1"></td>
+            <td height="1" bgcolor="#023264" width="1"><img alt=""
+                src="./images/void.gif" height="1" border="0" hspace="0"
+                vspace="0" width="1"></td>
+          </tr>
+          <tr>
+            <td bgcolor="#023264" width="1"><img alt=""
+                src="./images/void.gif" height="1" border="0" hspace="0"
+                vspace="0" width="1"></td>
+            <td height="1" bgcolor="#ffffff">
+              <pre>    &lt;listing&gt;
+     &lt;entries&gt;
+      &lt;entry type='file|dir' urlPath='aPath' size='###' date='gmt date'&gt;
+        fileName1
+      &lt;/entry&gt;
+      &lt;entry type='file|dir' urlPath='aPath' size='###' date='gmt date'&gt;
+        fileName2
+      &lt;/entry&gt;
+      ...
+     &lt;/entries&gt;
+     &lt;readme&gt;&lt;/readme&gt;
+    &lt;/listing&gt;
+</pre>
+            </td>
+            <td bgcolor="#023264" width="1"><img alt=""
+                src="./images/void.gif" height="1" border="0" hspace="0"
+                vspace="0" width="1"></td>
+          </tr>
+          <tr>
+            <td height="1" bgcolor="#023264" width="1"><img alt=""
+                src="./images/void.gif" height="1" border="0" hspace="0"
+                vspace="0" width="1"></td>
+            <td height="1" bgcolor="#023264"><img alt=""
+                src="./images/void.gif" height="1" border="0" hspace="0"
+                vspace="0" width="1"></td>
+            <td height="1" bgcolor="#023264" width="1"><img alt=""
+                src="./images/void.gif" height="1" border="0" hspace="0"
+                vspace="0" width="1"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <ul>
+      <li>size will be missing if <code>type='dir'</code></li>
+      <li>Readme is a CDATA entry</li>
+    </ul>
+    <p></p>
+    The following is a sample xsl file which mimics the default tomcat
+    behavior:<br>
+    (hon: error occurred with xsl:output method="xhtml" -- fixed with
+    "html") <br>
+    <div align="left">
+      <table cellspacing="4" border="0" cellpadding="0">
+        <tbody>
+          <tr>
+            <td height="1" bgcolor="#023264" width="1"><img alt=""
+                src="./images/void.gif" height="1" border="0" hspace="0"
+                vspace="0" width="1"></td>
+            <td height="1" bgcolor="#023264"><img alt=""
+                src="./images/void.gif" height="1" border="0" hspace="0"
+                vspace="0" width="1"></td>
+            <td height="1" bgcolor="#023264" width="1"><img alt=""
+                src="./images/void.gif" height="1" border="0" hspace="0"
+                vspace="0" width="1"></td>
+          </tr>
+          <tr>
+            <td bgcolor="#023264" width="1"><img alt=""
+                src="./images/void.gif" height="1" border="0" hspace="0"
+                vspace="0" width="1"></td>
+            <td height="1" bgcolor="#ffffff">
+              <pre>&lt;?xml version="1.0"?&gt;
+
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  version="1.0"&gt;
+
+  &lt;xsl:output method="xhtml" encoding="iso-8859-1" indent="no"/&gt;
+
+  &lt;xsl:template match="listing"&gt;
+   &lt;html&gt;
+    &lt;head&gt;
+      &lt;title&gt;
+        Sample Directory Listing For
+        &lt;xsl:value-of select="@directory"/&gt;
+      &lt;/title&gt;
+      &lt;style&gt;
+        h1{color : white;background-color : #0086b2;}
+        h3{color : white;background-color : #0086b2;}
+        body{font-family : sans-serif,Arial,Tahoma;
+             color : black;background-color : white;}
+        b{color : white;background-color : #0086b2;}
+        a{color : black;} HR{color : #0086b2;}
+      &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+      &lt;h1&gt;Sample Directory Listing For
+            &lt;xsl:value-of select="@directory"/&gt;
+      &lt;/h1&gt;
+      &lt;hr size="1" /&gt;
+      &lt;table cellspacing="0"
+                  width="100%"
+            cellpadding="5"
+                  align="center"&gt;
+        &lt;tr&gt;
+          &lt;th align="left"&gt;Filename&lt;/th&gt;
+          &lt;th align="center"&gt;Size&lt;/th&gt;
+          &lt;th align="right"&gt;Last Modified&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;xsl:apply-templates select="entries"/&gt;
+        &lt;/table&gt;
+      &lt;xsl:apply-templates select="readme"/&gt;
+      &lt;hr size="1" /&gt;
+      &lt;h3&gt;Apache Tomcat/5.0&lt;/h3&gt;
+    &lt;/body&gt;
+   &lt;/html&gt;
+  &lt;/xsl:template&gt;
+
+
+  &lt;xsl:template match="entries"&gt;
+    &lt;xsl:apply-templates select="entry"/&gt;
+  &lt;/xsl:template&gt;
+
+  &lt;xsl:template match="readme"&gt;
+    &lt;hr size="1" /&gt;
+    &lt;pre&gt;&lt;xsl:apply-templates/&gt;&lt;/pre&gt;
+  &lt;/xsl:template&gt;
+
+  &lt;xsl:template match="entry"&gt;
+    &lt;tr&gt;
+      &lt;td align="left"&gt;
+        &lt;xsl:variable name="urlPath" select="@urlPath"/&gt;
+        &lt;a href="{$urlPath}"&gt;
+          &lt;tt&gt;&lt;xsl:apply-templates/&gt;&lt;/tt&gt;
+        &lt;/a&gt;
+      &lt;/td&gt;
+      &lt;td align="right"&gt;
+        &lt;tt&gt;&lt;xsl:value-of select="@size"/&gt;&lt;/tt&gt;
+      &lt;/td&gt;
+      &lt;td align="right"&gt;
+        &lt;tt&gt;&lt;xsl:value-of select="@date"/&gt;&lt;/tt&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;
+</pre>
+            </td>
+            <td bgcolor="#023264" width="1"><img alt=""
+                src="./images/void.gif" height="1" border="0" hspace="0"
+                vspace="0" width="1"></td>
+          </tr>
+          <tr>
+            <td height="1" bgcolor="#023264" width="1"><img alt=""
+                src="./images/void.gif" height="1" border="0" hspace="0"
+                vspace="0" width="1"></td>
+            <td height="1" bgcolor="#023264"><img alt=""
+                src="./images/void.gif" height="1" border="0" hspace="0"
+                vspace="0" width="1"></td>
+            <td height="1" bgcolor="#023264" width="1"><img alt=""
+                src="./images/void.gif" height="1" border="0" hspace="0"
+                vspace="0" width="1"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
