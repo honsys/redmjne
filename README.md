@@ -14,7 +14,7 @@ of all essential runtime elements (as of March 2014):
   * Redmine 2.4.4 (2.5.0 jruby redcarpet glitch TBD) -- <http://www.redmine.org>
   * Rails 3.2.x -- <http://rubyonrails.org> (evidently Redmine has not yet moved to 4.x)
 
-Apache Tomcat example configs. are included, with and without SSL/HTTPS.
-HAProxy and IPTables firewall example configs. are also included to provide
+Apache Tomcat example configs. (TBD) included, with and without SSL/HTTPS.
+HAProxy and IPTables firewall example configs. are also (TBD) included to provide
 an optional reverse-proxy setup. 
 
