@@ -20,7 +20,7 @@ a reverse-proxy setup. Note the configs allow for two tomcat runtimes
 (port 8080 and either 8090 or 8070). Also, moving from tomcat 7 to tomcat 8
 required one modest change (I vaguely recall) in the AJP section of server.xml
 (since I use haproxy rather that apache httpd, there's little need to support mod_jk).
-See AJP comments in "http://tomcat.apache.org/tomcat-8.0-doc/changelog.html
+See AJP comments in <http://tomcat.apache.org/tomcat-8.0-doc/changelog.html>
 
 Note the haproxy.conf is composed via:
 
