@@ -85,39 +85,13 @@ if ( ! -e warbler ) then
   $gitc https://github.com/jruby/warbler.git
 endif
 #
+popd # ../build
 # git all plugins
-if ( ! -e ./plugins ) mkdir ./plugins 
-pushd ./plugins # and fetch (git clone) latest releases of each plugin
-#
-set plugs = "redmine_banner redmine_knowledgebase redmine_wiki_books redmine_startpage redmine_latex_mathjax redmine-wiki_graphviz_plugin"
-#
-set url = https://github.com/akiko-pusu/redmine_banner.git
-$gitc $url
-#
-set url = https://github.com/ichizok/redmine_blogs.git
-$gitc $url
-#
-set url = https://github.com/alexbevi/redmine_knowledgebase.git
-$gitc $url
-#
-set url = https://github.com/process91/redmine_latex_mathjax.git
-$gitc $url
-#
-set url = https://github.com/txinto/redmine_startpage.git
-$gitc $url
-#
-set url = https://github.com/txinto/redmine_wiki_books.git
-$gitc $url
-#
-set url = https://github.com/tckz/redmine-wiki_graphviz_plugin.git
-$gitc $url
-#
-popd # back to build
+source fetch_plugins.csh
 #
 echo 'fetched all required jruby-redmine (redmjne) components and plugins:'
 echo $plugs
 #
-popd # out of build subdir
 which java ; java -version
 $JRUBY_HOME/bin/jruby -v
 ls -al ./build ./build/plugins

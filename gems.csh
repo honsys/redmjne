@@ -38,6 +38,7 @@ echo 'gem "pandoc-ruby"' >> ./.Gemfile
 echo 'gem "holidays", "~>1.0.3"' >> ./.Gemfile
 echo 'gem "icalendar"' >> ./.Gemfile
 echo 'gem "json"' >> ./.Gemfile
+echo 'gem "kramdown"' >> ./.Gemfile
 echo 'gem "liquid"' >> ./.Gemfile
 #echo 'gem "nokogiri", "< 1.6.0"' >> ./.Gemfile
 echo 'gem "open-uri-cached"' >> ./.Gemfile
@@ -46,6 +47,8 @@ echo 'gem "prawn"' >> ./.Gemfile
 # plugins need this:
 echo 'gem "multi_json", "=1.8.4"' >> ./.Gemfile
 echo 'gem "redmine_acts_as_taggable_on"' >> ./.Gemfile
+echo 'gem "sunspot_rails"' >> ./.Gemfile
+echo 'gem "sunspot_solr"' >> ./.Gemfile
 echo 'gem "ya2yaml"' >> ./.Gemfile
 #
 # try radiant cms?
