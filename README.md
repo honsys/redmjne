@@ -14,7 +14,14 @@ of all essential runtime elements (as of March 2014):
   * Redmine 2.4.4 (2.5.0 jruby redcarpet glitch TBD) -- <http://www.redmine.org>
   * Rails 3.2.x -- <http://rubyonrails.org> (evidently Redmine has not yet moved to 4.x)
 
-Apache Tomcat example configs. (TBD) included, with and without SSL/HTTPS.
-HAProxy and IPTables firewall example configs. are also (TBD) included to provide
-an optional reverse-proxy setup. 
+Apache Tomcat example configs. included, with and without SSL/HTTPS.
+HAProxy and IPTables firewall example configs. are also included to provide
+a reverse-proxy setup. Note the configs allow for two tomcat runtimes
+(port 8080 and either 8090 or 8070). Also, moving from tomcat 7 to tomcat 8
+reqires one modest change (so far) removal of AJP connector from server.xml
+(since I use haproxy rather that apache httpd, there's little need to support mod_jk).
+
+This is overdue some updates (as of Aug 2014) -- newer releases of all elements are
+available, and a number of scripts changes too. I plan to return to this "next week
+or next month (whatever that means).
 
