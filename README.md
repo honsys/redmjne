@@ -30,5 +30,5 @@ are of interest, edit the "frontend" conf and exclude the nodejsbackends from th
 
 This is overdue some updates (as of Aug 2014) -- newer releases of all elements are
 available, and a number of scripts changes too. I plan to return to this "next week
-or next month (whatever that means).
+or next month" (whatever that means).
 
