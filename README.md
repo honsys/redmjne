@@ -21,6 +21,13 @@ a reverse-proxy setup. Note the configs allow for two tomcat runtimes
 reqires one modest change (so far) removal of AJP connector from server.xml
 (since I use haproxy rather that apache httpd, there's little need to support mod_jk).
 
+Note the haproxy.conf is composed via:
+
+cat haproxy_globaldefaults.conf haproxy_frontend_auth.conf haproxy_stats.conf haproxy_jeebackends.conf haproxy_nodejsbackends.conf > haproxy_nodejsbackends.conf
+
+All the above will require edits for one's specific deployment. If no NodeJS backends
+are of interest, edit the "frontend" conf and exclude the nodejsbackends from the cat.
+
 This is overdue some updates (as of Aug 2014) -- newer releases of all elements are
 available, and a number of scripts changes too. I plan to return to this "next week
 or next month (whatever that means).
