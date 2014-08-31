@@ -24,7 +24,7 @@ See AJP comments in <http://tomcat.apache.org/tomcat-8.0-doc/changelog.html>
 
 Note the haproxy.conf is composed via:
 
-cat haproxy_globaldefaults.conf haproxy_frontend_auth.conf haproxy_stats.conf \
+cat haproxy_globaldefaults.conf haproxy_frontend_auth.conf haproxy_stats.conf \ <br\>
 haproxy_jeebackends.conf haproxy_nodejsbackends.conf > haproxy.conf
 
 All the above will require edits for one's specific deployment. If no NodeJS backends
