@@ -1,7 +1,7 @@
 redmjne deployment war
 ======================
 redmjne2.6.2_jruby1.7.19_jvm8.war
-JRuby Redmine deployment war for Redmine 2.6.2 using Jruby 1.79 tested with Java 8 via Tomcat 7
+JRuby Redmine deployment war for Redmine 2.6.2 using Jruby 1.7.19 tested with Java 8 via Tomcat 7
 
 This is the most recent (March 2015) build. The Feb. 2015 release of Redmine 3.0.0 
 indicated Active Record issues in JRuby, consequently this is the Feb. 2015 
