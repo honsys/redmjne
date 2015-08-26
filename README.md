@@ -5,7 +5,7 @@ JRuby Redmine deployments that are fully self-contained, with and without
 customization via plugins and themes in JEE Apache-Tomcat WARs.
 
 Redmjne releases will hopefully keep up-2-date with the latest stable releases 
-of all essential runtime elements (as of March 2015, please see the deplyment
+of all essential runtime elements; as of March 2015, please see the deplyment
 folder <https://github.com/honsys/redmjne/blob/master/deploy/README.md>
  
   * Java 7 or later -- <http://www.oracle.com/technetwork/java/javase/downloads/index.html>
